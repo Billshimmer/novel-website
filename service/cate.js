@@ -10,5 +10,5 @@ export let Get = function () {
     console.log(error);
   })
 
-  return json
+  return json;
 }

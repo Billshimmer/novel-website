@@ -5,18 +5,21 @@ export default function(url, params, type = "GET") {
     var xhr = new XMLHttpRequest();
     var data = new FormData();
 
-    var formdata = function(args) {
-      for (var i in args) {
-        data.append(i, args[i]);
+    var formdata = function(params) {
+        for (var i in params) {
+            if (args.hasOwnProperty(i)) {
+                data.append(i, args[i]);
+            }
       }
     };
-    params ? formdata(data) : null;
+    params ? formdata(params) : null;
 
     xhr.timeout = 3000;
     xhr.responseType = "json";
 
     xhr.open(type, host + url, true);
-    xhr.onload = function(res) {
+    xhr.onload = function (res) {
+      console.log(res);
       var json = xhr.response;
       resolve(json);
     };
