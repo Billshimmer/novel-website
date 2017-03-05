@@ -1,43 +1,31 @@
-import $ from 'jquery';
+import {host} from "./request.config.js";
 
+export default function(url, params, type = "GET") {
+  return new Promise(function(resolve, reject) {
+    var xhr = new XMLHttpRequest();
+    var data = new FormData();
 
-export default function(url, type = "GET", params, is_mock = false) {
-    if (type == "POST" || type == "PUT")
-        params = JSON.stringify(params || {})
+    var formdata = function(args) {
+      for (var i in args) {
+        data.append(i, args[i]);
+      }
+    };
+    params ? formdata(data) : null;
 
-    let deferred = $.Deferred()
-    let setup = {
-        type: type,
-        url: url,
-        data: params,
-        contentType: "application/json; charset=UTF-8",
-        dataType: 'json',
-        success: deferred.resolve,
-        error: deferred.reject
-    }
+    xhr.timeout = 3000;
+    xhr.responseType = "json";
 
-    $.ajax(setup)
-    return deferred.promise()
+    xhr.open(type, host + url, true);
+    xhr.onload = function(res) {
+      var json = xhr.response;
+      resolve(json);
+    };
 
-    // return new Promise((resolve, reject) => {
-    //     let setup = {
-    //         type: type,
-    //         url: parse_url(url, is_mock),
-    //         data: params,
-    //         contentType: "application/json; charset=UTF-8",
-    //         dataType: 'json',
-    //         success: resolve,
-    //         error: reject
-    //     }
-    //
-    //     if (localStorage['yydvy_token']) {
-    //         Object.assign(setup, {
-    //             headers: {
-    //                 "Authorization": "Token " + localStorage['yydvy_token']
-    //             }
-    //         })
-    //     }
-    //
-    //     $.ajax(setup)
-    // })
+    xhr.onerror = function(e) {
+      console.error("网络错误");
+      reject(e);
+    };
+
+    xhr.send(data);
+  });
 }

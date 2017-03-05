@@ -17,7 +17,7 @@
   </div>
 </template>
 <script>
-import request from "../../request.js"
+import {Get} from "../../service/cate.js";
 
 export default {
   name: 'Home',
@@ -25,16 +25,12 @@ export default {
     return {
       msg: '小说阅读网',
       data: [
-
       ],
     }
   },
   created: function(){
-    var data;
-    request("http://45.32.51.15:9000/api/cates", "GET").then(res=>{
-      console.log(res)
-    })
-  }
+    let json = Get();
+  },
 }
 </script>
 
