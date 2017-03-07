@@ -19,7 +19,6 @@ export default function(url, params, type = "GET") {
 
     xhr.open(type, host + url, true);
     xhr.onload = function (res) {
-      console.log(res);
       var json = xhr.response;
       resolve(json);
     };

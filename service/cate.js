@@ -1,14 +1,6 @@
-import request from "../request.js";
+import request from '../request.js';
+import Loading from '@/components/Loading/index.js';
 
-export let Get = function () {
-  let json = null;
-  request("/api/cates", {}, "GET")
-  .then(data => {
-    console.log(data);
-    json = data;
-  }).catch(error => {
-    console.log(error);
-  })
-
-  return json;
-}
+export let Get = async function() {
+    return  request('/api/cates', {}, 'GET');
+};

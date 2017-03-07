@@ -4,12 +4,15 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+//引入通用样式
+import "../vendor/main.less"
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  router,
+  router: router,
   template: '<App/>',
   components: { App }
 })
