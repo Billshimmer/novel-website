@@ -3,6 +3,7 @@ var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
 var vuxLoader = require("vux-loader")
+var projectRoot = path.resolve(__dirname, '../')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -68,6 +69,14 @@ module.exports = {
       {
         test: /\.css$/,
         loader: "style!css"
+      },
+      {
+        test: /\.es6$/,
+        exclude: /node_modules/,
+        loader: 'babel',
+        query: {
+          presets: ['es2015']
+        }
       }
     ]
   }

@@ -23,7 +23,6 @@
       </div>
       <a href="http://downloads2.txt99.com/d/file/p/txt/2017/%E7%9A%87%E5%91%BD%E9%9A%BE%E8%BF%9D.txt" 
          download="novel-text.txt">下载链接</a>
-      <router-view></router-view>
     </div>
   </div>
 </template>

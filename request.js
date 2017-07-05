@@ -1,6 +1,6 @@
-import {host} from "./request.config.js";
+import config from "./request.config.js";
 
-export default function(url, params, type = "GET") {
+export default function(url, params, type) {
   return new Promise(function(resolve, reject) {
     var xhr = new XMLHttpRequest();
     var data = new FormData();
@@ -13,11 +13,12 @@ export default function(url, params, type = "GET") {
       }
     };
     params ? formdata(params) : null;
+    type = type || 'GET';
 
     xhr.timeout = 3000;
     xhr.responseType = "json";
 
-    xhr.open(type, host + url, true);
+    xhr.open(type, config.host + url, true);
     xhr.onload = function (res) {
       var json = xhr.response;
       resolve(json);
